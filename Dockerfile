@@ -2,6 +2,7 @@ FROM centos:latest
 RUN cd /etc/yum.repos.d/
 RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
 RUN sed -i 's|#baseurl=[5](http://mirror.centos.org)|baseurl=[6](http://vault.centos.org)|g' /etc/yum.repos.d/CentOS-*
+CMD /bin/bash
 RUN yum install -y httpd \
     zip \
     unzip
