@@ -1,14 +1,17 @@
-FROM centos:latest
+# Pull the minimal Ubuntu image
+FROM ubuntu
 
-MAINTAINER NewstarCorporation
+# Install Nginx
+RUN apt-get -y update && apt-get -y install nginx
 
-RUN yum -y install httpd
+# Copy the Nginx config
+COPY default /etc/nginx/sites-available/default
 
-COPY index.html /var/www/html/
+# Expose the port for access
+EXPOSE 80/tcp
 
-CMD [“/usr/sbin/httpd”, “-D”, “FOREGROUND”]
-
-EXPOSE 80
+# Run the Nginx server
+CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
 
 # FROM  centos:latest
 # MAINTAINER vikashashoke@gmail.com
